@@ -20,7 +20,7 @@ move_uploaded_file($post_image_temp, "../images/$post_image" );
 
 }
 ?>
-<form action="" method="post"enctype="multipert/form-data">
+<form action="" method="post"enctype="multipart/form-data">
 	<!--we need enctype attribute will be in charge of sending multiple data sice we also have images-->
 
 	<div class="form-group">

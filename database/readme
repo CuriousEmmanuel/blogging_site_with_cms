@@ -1,0 +1,4 @@
+The database name is cms 
+after creating the dtabase click inport then choose the file in this directory cms.sql
+it will create the tables an all its contents
+Use any admin user to login if it works

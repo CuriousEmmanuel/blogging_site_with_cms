@@ -35,12 +35,7 @@
                      if ($post_status !== 'published') {
                          echo "<h1 class='text-center'>SORRY NO POSTS HERE!</h1>";
                     
-                     }else{
-
-
-                     
-
-                   
+                     }else{  
                ?>
 
                 <h2>
@@ -55,7 +50,7 @@
                 
                 <hr>
                 <p><?php echo $post_content; ?></p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
 
 

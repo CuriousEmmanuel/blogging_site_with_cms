@@ -33,9 +33,6 @@
                      $post_status = $row["post_status"];
 
                      if ($post_status !== 'published') {
-                         echo "<h1 class='text-center'>SORRY NO POSTS HERE!</h1>";
-                    
-                     }else{  
                ?>
 
                 <h2>

@@ -36,7 +36,7 @@
                         $post_author = $row["post_author"];
                         $post_date = $row["post_date"];
                         $post_image = $row["post_image"];
-                        $post_content = substr($row["post_content"], 0, 300); //truncate upto only 100 characters on the content to display on the index page
+                        $post_content = substr($row["post_content"], 0, 300); //truncate upto only 300 characters on the content to display on the index page
                         $post_status = $row["post_status"];
 
                         //  filter result to published post only 

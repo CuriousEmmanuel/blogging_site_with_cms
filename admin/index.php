@@ -64,11 +64,7 @@ $post_row_count = mysqli_num_rows($count_posts_query);
 
 
 ?>
-
-
-
-
-                  <div class='huge'><?php echo $post_row_count ?></div>
+ <div class='huge'><?php echo $post_row_count ?></div>
                         <div>Posts</div>
                     </div>
                 </div>
@@ -230,14 +226,7 @@ $subscribers_count = mysqli_num_rows($select_subscriber);
            echo "['{$element_text[$i]}'".","."{$element_count[$i]}],";
           }
 
-
-
           ?>
-
-
-
-
-         // ['posts', 1000, ],
           
         ]);
 

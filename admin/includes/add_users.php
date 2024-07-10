@@ -29,7 +29,9 @@ $query.= " VALUES ('{$user_firstname }', '{$user_lastname}', '{$user_role}','{$u
 $add_user_query = mysqli_query($connection,$query);
 
 //CONFIRMQUERY FUNCTION NEEDS TO BE FIXED ASAPcreate_users
-//confirmquery($add_user_query );
+confirmquery($add_user_query );
+
+echo "User created "." "."<a href='users.php'>View users</a>";
 
 }
 ?>

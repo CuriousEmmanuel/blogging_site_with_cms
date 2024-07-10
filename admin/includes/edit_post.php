@@ -65,12 +65,12 @@ $query.= " WHERE post_id = $the_post_id ";
 
 $update_query = mysqli_query($connection, $query);
 
- //confirmquery($update_query);
-
-
-
+ confirmquery($update_query);
+ echo "<p class='bg-success'>Post updated. <a href='../post.php?p_id={$the_post_id}'>View post</a> Or <a href='posts.php'</a>Edit more posts</p>";
 }
 ?>
+
+
 
 <form action="" method="post"enctype="multipart/form-data">
 
@@ -109,13 +109,34 @@ $cat_title = $row["cat_title"];
 		<input value="<?php echo $post_title?>"type="text"class="form-control" name="post_author">
 	</div>
 
+<div class="form-group">
+<select name="post_status" id="">
+	<option value='<?php echo $post_status?>'><?php echo $post_status?></option>
+
+	<?php
+if($post_status == 'published'){
+
+	 echo "<option value='draft'>Draft</option>";
+
+}else{
+	echo "<option value='published'>Publish</option>";
+
+}
 
 
-	<div class="form-group">
+	?>
+</select>
+
+</div>
+
+
+
+
+	<!-- <div class="form-group">
 		<label for="post_status">post status</label>
-		<input value="<?php echo $post_status?>" type="text"class="form-control" name="post_status">
+		<input value="<?php //echo $post_status?>" type="text"class="form-control" name="post_status">
 	</div>
-
+ -->
 
 
 	<div class="form-group">

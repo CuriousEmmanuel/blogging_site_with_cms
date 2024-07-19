@@ -27,6 +27,8 @@ if (isset($_POST['login'])) {
       $db_user_lastname = $row['user_lastname'];
       $db_user_role = $row['user_role'];
     }
+    // crypt function from registration.php with some changes
+     $password = crypt($password,$db_user_password );
 
     if ($username === $db_username && $password === $db_user_password) {
 
@@ -34,7 +36,7 @@ if (isset($_POST['login'])) {
       $_SESSION['user_firstname'] =  $db_user_firstname;
       $_SESSION['user_lastname'] =  $db_user_lastname;
       $_SESSION['user_role'] =  $db_user_role; 
-      $_SESSION['username'] =  $db_username;
+
 
         header("Location: ../admin");
 

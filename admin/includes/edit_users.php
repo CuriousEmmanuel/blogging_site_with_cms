@@ -48,17 +48,29 @@ $user_password = $_POST['user_password'];
 //move_uploaded_file($post_image_temp, "../images/$post_image" );
 
 
+// WE UPDATE OUR EDIT_USER PAGE SO THAT IT ENCRYPTS THE PASSWORD
 
+//FIRST PULL RAND COLUMN FROM THE DATABASE
+$query = " SELECT randSalt FROM users ";
+$select_randsalt_query = mysqli_query($connection, $query);
+if(!$select_randsalt_query){
+	die('QUERY FAILED!!!'. mysqli_error($connection));
+}
 
+// crypting the password
+//since it is only a singlr record no need for a wile loop
+$row  = mysqli_fetch_assoc($select_randsalt_query );
+$salt = $row['randSalt'];
+$hashed_password = crypt($user_password,$salt);
 
 
 $query = " UPDATE users set ";
-$query.= " user_firstname = '{$user_firstname}', ";
+$query.= " user_firstname= '{$user_firstname}', ";
 $query.= " user_lastname = '{$user_lastname}', ";
-$query.= " username = '{$username}', ";
-$query.= " user_role = '{$user_role}', ";
-$query.= " user_email = '{$user_email}', ";
-$query.= " user_password = '{$user_password}' ";
+$query.= " username      = '{$username}', ";
+$query.= " user_role     = '{$user_role}', ";
+$query.= " user_email    = '{$user_email}', ";
+$query.= " user_password = '{$hashed_password}' ";
 
 $query.= " WHERE user_id = $the_user_id ";
 
@@ -99,8 +111,8 @@ $edit_user_query = mysqli_query($connection, $query);
 	<div class="form-group">
         <label for="role">Role</label><br>
 		<select name="user_role"id="">
-        
-        <option value="subscriber"><?php echo $user_role; ?></option>
+        <!-- it is good to use the current user role as a default value to avoid it setting it autommatically to subscriber during update -->
+        <option value=<?php echo $user_role; ?>><?php echo $user_role; ?></option>
         <?php
 
         if ($user_role == 'admin') {

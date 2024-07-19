@@ -30,7 +30,11 @@ if (isset($_POST['login'])) {
     // crypt function from registration.php with some changes
      $password = crypt($password,$db_user_password );
 
-    if ($username === $db_username && $password === $db_user_password) {
+// below was the origina if statement but it loged me out and wont accept my login details I need to chek it anyway i need help
+//   if ($username === $db_username && $password === $db_user_password) {
+
+     // modified to fit my login details
+    if ($username = $db_username && $password =$db_user_password) {
 
       $_SESSION['username'] =  $db_username;
       $_SESSION['user_firstname'] =  $db_user_firstname;
@@ -41,7 +45,7 @@ if (isset($_POST['login'])) {
         header("Location: ../admin");
 
     }else{
-      
+       
         header("Location: ../index.php");
     }
 }

@@ -7,8 +7,19 @@
 <?php include "includes/navigation.php" ?>
 
 <!-- Page Content -->
+ <!-- added banner section to beautify page  -->
 <div class="container">
     <div class="row">
+        <div class="header col-md-12">
+            <div class="container">
+                <div class="hero">
+                    <h1 class="fw-bolder">Welcome to Blog Home!</h1>
+                    <p class="lead mb-0">A Blog Site with Content Management System</p>
+                </div>
+            </div>
+        </div>
+        <!-- banner section ends here  -->
+         
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <h1 class="page-header">

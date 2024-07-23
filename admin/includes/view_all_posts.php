@@ -1,3 +1,7 @@
+
+<?php //I have solved one error(the mysqli error one collum ahead of another and empty column comment count ) but I have another problem there is no error but the comments are not counting anymore 
+// A suggestion the comment,,,, never mind i forgot while typing
+ ?>
 <?php
 //query to fetch the ids for the checkarray[] to be used by checkboxes
 if (isset($_POST['checkBoxArray'])) {
@@ -32,7 +36,33 @@ if (isset($_POST['checkBoxArray'])) {
            if (!$updateTodelete_Post_status) {
                die('QUERY FAILED'.mysqli_error($connection)); 
             }
-           
+           break;
+
+            case 'clone':
+    
+            $query = "SELECT * FROM posts WHERE post_id ='{$postValueId}'";
+            $select_posts_query = mysqli_query($connection,$query);
+
+            while ($row  = mysqli_fetch_assoc($select_posts_query)) {
+            $post_author = $row["post_author"];
+            $post_title  = $row["post_title"];
+            $post_category_id = $row["post_category_id"];
+            $post_status = $row["post_status"];
+            $post_image  = $row["post_image"];
+            $post_tags   = $row["post_tags"];
+            $post_comment_count= $row["post_comment_count"];
+            $post_date   = $row["post_date"];
+            $post_content= $row["post_content"];
+}
+$query = " INSERT INTO posts(post_category_id,post_title,post_author,post_date,post_image,post_content,post_tags,post_status,post_comment_count) " ;
+//I used the blank post_comment_count to avoid the empty error now the comments are all empty not counting anymore
+$query.= " VALUES ({$post_category_id },'{$post_title}','{$post_author}',now(),'{$post_image}','{$post_content }','{$post_tags}','{$post_status}',' ' ) " ;
+
+$clone_post_query = mysqli_query($connection,$query);
+
+if(!$clone_post_query ){
+    die("QUERY FAILED". mysqli_error($connection)." ". mysqli_errno($connection));
+}
             break;
 
 
@@ -52,6 +82,7 @@ if (isset($_POST['checkBoxArray'])) {
         <option value="published">Publish</option> 
         <option value="draft">Draft</option> 
         <option value="delete">Delete</option> 
+        <option value="clone">Clone</option> 
         </select>
         </div>
         <div class="col-xs-4">

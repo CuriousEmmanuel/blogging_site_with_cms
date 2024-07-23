@@ -83,7 +83,7 @@
             $query .= " WHERE post_id = $the_post_id "; 
 
 
-            $update_comment_count = mysqli_query($connection,$query);
+            $update_comment_count = mysqli_query($connection,$query); 
             if (!$update_comment_count) {
                 die("query failed". mysqli_error($connection));
             }

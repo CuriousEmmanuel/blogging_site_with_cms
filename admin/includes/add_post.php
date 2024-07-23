@@ -1,4 +1,13 @@
 <?php
+
+
+
+// Remember to add a notification to show user post created.view post
+// And use select on the post status not everytime you type manually draft or published
+// A refference video about that is in 21 > 184 and 185
+
+
+
 if (isset($_POST['create_post'])){
 
 $post_title = $_POST['title'];
@@ -18,14 +27,21 @@ $post_content = $_POST['post_content'];
 
 move_uploaded_file($post_image_temp, "../images/$post_image" );
 
-$query = " INSERT INTO posts (post_category_id , post_title, post_author, post_date, Post_image, post_content,post_tags,  post_comment_count post_status)" ;
 
-$query.= "VALUES ({$post_category_id }, '{$post_title}', '{$post_author}', 	now(), '{$post_image}', '{$post_content }','{$post_tags}','{$post_status}') " ;
+// one field more tha the other (post comment count) find its value or delete it which will cause another error
+
+
+$query = " INSERT INTO posts(post_category_id,post_title,post_author,post_date,post_image,post_content,post_tags, post_comment_count,post_status) " ;
+
+$query.= " VALUES ({$post_category_id },'{$post_title}','{$post_author}',now(),'{$post_image}','{$post_content }','{$post_tags}',' ','{$post_status}') " ;
 
 $add_post_query = mysqli_query($connection,$query);
 
 //CONFIRMQUERY FUNCTION NEEDS TO BE FIXED ASAP
 confirmquery($add_post_query );
+if(!$add_post_query ){
+	die("QUERY FAILED". mysqli_error($connection)." ". mysqli_errno($connection));
+}
 
 }
 ?>

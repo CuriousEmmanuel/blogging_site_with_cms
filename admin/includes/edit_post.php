@@ -60,10 +60,14 @@ if (isset($_POST['update_post'])) {
 
 	$update_query = mysqli_query($connection, $query);
 
-	//confirmquery($update_query);
+ //confirmquery($update_query);
+
+
 
 }
 ?>
+
+
 
 <form action="" method="post" enctype="multipart/form-data">
 
@@ -95,10 +99,16 @@ if (isset($_POST['update_post'])) {
 		<label for="post_outher">post author</label>
 		<input value="<?php echo $post_author ?>" type="text" class="form-control" name="post_author">
 	</div>
+
+
+
 	<div class="form-group">
 		<label for="post_status">post status</label>
-		<input value="<?php echo $post_status ?>" type="text" class="form-control" name="post_status">
+		<input value="<?php echo $post_status?>" type="text"class="form-control" name="post_status">
 	</div>
+
+
+
 	<div class="form-group">
 		<img width="100" src="../images/<?php echo $post_image; ?>" alt="">
 		<input type="file" class="form-control" name="image">

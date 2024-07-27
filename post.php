@@ -14,15 +14,9 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
 
-                <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
-                </h1>
 
                 <!-- First Blog Post -->
             <?php
-
-
             if(isset($_GET['p_id'])){
                $the_post_id = $_GET['p_id'];
             }
@@ -34,16 +28,15 @@
                      $post_date   = $row["post_date"];
                      $post_image  = $row["post_image"];
                      $post_content= $row["post_content"];
-
-                   
                ?>
+               <!-- added the post title as the heading  -->
+                <h1 class="page-header">
+                    <!-- //removed unnecessary link in the post title for the heading  -->
+                    <?php echo $post_title ?>
+                </h1>
 
-                <h2>
-                    <a href="#"><?php echo $post_title ?></a>
-                </h2>
-                <p class="lead">
-                    by <a href="index.php"><?php echo $post_author ?></a>
-                </p>
+                <!-- //add profile icon to streamline the look of the page -->
+                <p><span class="glyphicon glyphicon-user"></span><a href="index.php"><?php echo $post_author ?></a></p>
                 <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date ?></p>
                 <hr>
                 <img class="img-responsive" src="images/<?php echo $post_image; ?>" alt="">

@@ -53,10 +53,11 @@ if (isset($_POST['checkBoxArray'])) {
             $post_comment_count= $row["post_comment_count"];
             $post_date   = $row["post_date"];
             $post_content= $row["post_content"];
+            $post_views_count= $row["post_views_count"];
 }
-$query = " INSERT INTO posts(post_category_id,post_title,post_author,post_date,post_image,post_content,post_tags,post_status,post_comment_count) " ;
+$query = " INSERT INTO posts(post_category_id,post_title,post_author,post_date,post_image,post_content,post_tags,post_status,post_comment_count,post_views_count) " ;
 //I used the blank post_comment_count to avoid the empty error now the comments are all empty not counting anymore
-$query.= " VALUES ({$post_category_id },'{$post_title}','{$post_author}',now(),'{$post_image}','{$post_content }','{$post_tags}','{$post_status}',' ' ) " ;
+$query.= " VALUES ({$post_category_id },'{$post_title}','{$post_author}',now(),'{$post_image}','{$post_content }','{$post_tags}','{$post_status}',post_comment_count,post_views_count) " ;
 
 $clone_post_query = mysqli_query($connection,$query);
 
@@ -103,6 +104,8 @@ if(!$clone_post_query ){
                        <th>View post</th>
                        <th>Edit</th>
                        <th>Delete</th>
+                       <th>views count</th>
+                       <th>reset views</th>
                    </tr>
                   
                
@@ -123,6 +126,7 @@ $post_image= $row["post_image"];
 $post_tags = $row["post_tags"];
 $post_comment_count = $row["post_comment_count"];
 $post_date = $row["post_date"];
+$post_views_count = $row["post_views_count"];
 
 echo "<tr>";
 //inserting checkbox td column
@@ -156,7 +160,10 @@ echo "<td><a href = '../post.php?p_id={$post_id}'>View Post</a></td>";
 echo "<td><a href = 'posts.php?source=edit_post&p_id={$post_id}'>edit</a></td>";
 echo "<td><a onClick=\" javascript: return confirm('Are you sure you want to delete this post')\" href = 'posts.php?delete={$post_id}'>delete</a></td>";
 // \" this is an escape sequence  \"
+echo "<td> {$post_views_count}</td>";
+echo "<td><a href = 'posts.php?reset={$post_id}'>reset views</a></td>";
 echo "</tr>";
+
 
 }//source=edit_post&post_id the amber sign helps using multiple parameters to specify exactly where you want that link to take you
 
@@ -179,4 +186,20 @@ if (isset($_GET['delete'])) {
 }
 // we need to refresh the table automatically
 
+   ?>
+
+
+<?php
+
+if (isset($_GET['reset'])) {
+ $the_post_id=$_GET['reset'];
+
+ $reset_views_query = "UPDATE posts SET post_views_count = 0 WHERE post_id = $the_post_id";
+ $send_reset_view_query = mysqli_query($connection,$reset_views_query);
+     header("location:posts.php");
+       if (!$send_reset_view_query) {
+         die("views query failed" . mysqli_error($connection));
+
+       }
+}
    ?>

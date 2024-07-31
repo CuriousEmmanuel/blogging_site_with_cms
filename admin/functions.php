@@ -1,4 +1,50 @@
 <?php
+
+function users_online(){
+
+if(isset($_GET['onlineusers'])){
+global $connection;
+
+if(!$connection){
+
+    session_start();
+    include("../includes/db.php");
+
+
+$session = session_id();
+$time = time();
+$time_out_in_seconds = 30;
+$time_out = $time - $time_out_in_seconds;
+
+
+
+$query = "SELECT * FROM users_online WHERE session =' $session'";
+$send_query = mysqli_query($connection,$query);
+$count = mysqli_num_rows($send_query);
+
+if($count == NULL){
+    mysqli_query($connection, "INSERT INTO users_online(session,time) VALUES('$session','$time')");
+}else{
+     mysqli_query($connection, "UPDATE users_online SET time = '$time' WHERE session = '$session'");
+}
+$user_online_query = mysqli_query($connection, "SELECT * FROM users_online WHERE time >'$time_out'");
+echo $count_users = mysqli_num_rows($user_online_query);
+
+}
+
+
+
+
+}//if isset() clossing br
+
+
+}
+
+users_online();
+
+
+///////////////////////////////////////////////////////////////////////////////////
+
 function insert_categories(){
 
 	    global $connection;// make the connection global because its private by default and we cant use it in other files if its private we need it tobe public
@@ -28,7 +74,7 @@ function insert_categories(){
 
 }
 
-
+//////////////////////////////////////////////////////////////////////////////////////
 function getAllACategories(){
 	global $connection;
 
@@ -48,7 +94,7 @@ echo "</tr>";
 }
 }
 
-
+//////////////////////////////////////////////////////////////////////////////////////
 function DeleteQuery(){
 	global $connection;
 
@@ -63,8 +109,7 @@ function DeleteQuery(){
 
 }
 
-
-
+////////////////////////////////////////////////////////////////////////////////////
 
 function confirmquery($result){
  

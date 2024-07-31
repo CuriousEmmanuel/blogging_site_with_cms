@@ -5,8 +5,6 @@
 
 
 
-
-
         <!-- Navigation -->
         <?php include "includes/admin_navigation.php" ?>
 
@@ -25,7 +23,18 @@
             </h1>
 
 
-                        <?php if($connection) echo "connected"; ?>
+                        <?php if(!$connection) echo "not connected"; ?>
+
+
+
+
+                        <h1>
+                            
+                            <?php
+                            //count user query was here before making it a funcion
+                          // echo $count_users;
+                            ?>
+                        </h1>
 
                         <!--
                         <ol class="breadcrumb">

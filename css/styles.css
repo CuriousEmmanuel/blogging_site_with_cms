@@ -1,0 +1,4 @@
+.pager li .active_link{
+    background: #000 !important;
+    //the !important key is for security purposes just incase something try to overide the color we have set
+}

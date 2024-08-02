@@ -25,10 +25,13 @@
             //makin pages and limiting the number of posts per page
 
             if(isset($_GET['page'])){
+
                 $page = $_GET['page'];
+
             }else{
-                echo "";
+                echo " ";
             }
+              
             if ($page == 0 || $page == 1) {
                $page_1 = 0;
             }else{

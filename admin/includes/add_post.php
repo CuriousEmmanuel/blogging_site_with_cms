@@ -9,11 +9,22 @@
 
 
 if (isset($_POST['create_post'])){
+	
+//the last function I added for cleaning data;
 
-$post_title = $_POST['title'];
-$post_category_id = $_POST['post_category'];
-$post_author = $_POST['post_author'];
-$post_status= $_POST['post_status'];
+$post_title = escape($_POST['title']);
+$post_category_id = escape($_POST['post_category']);
+$post_author = escape($_POST['post_author']);
+$post_status= escape($_POST['post_status']);
+
+
+//how it was before cleaning
+
+
+// $post_title = $_POST['title'];
+// $post_category_id = $_POST['post_category'];
+// $post_author = $_POST['post_author'];
+// $post_status= $_POST['post_status'];
 
 $post_image = $_FILES['image']['name'];
 $post_image_temp = $_FILES['image']['tmp_name'];//sending files to a temporary location on the server

@@ -8,38 +8,6 @@ body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
-
-/* header banner section styling  */
-.header{
-    padding-top: 3rem !important;
-    padding-bottom: 3rem !important;
-    margin-bottom: 1.5rem !important;
-    background-color: rgba(248,249,250,1) !important;
-    border-bottom: 1px solid #dee2e6 !important;
-}
-.container{
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-
-}
-.hero{
-    padding-top: 3rem !important;
-    padding-bottom: 3rem !important;
-    text-align: center !important;
-    margin-top: 3rem !important;
-    margin-bottom: 3rem !important;
-}
-.hero h1{
-    font-weight: bolder !important;
-}
-.hero p{
-    /* font-size: 1.25rem; */
-    font-weight: lighter !important;
-    margin-bottom: 0 !important;
-}
-
-/* footer styling */
 footer {
     margin: 50px 0;
 }

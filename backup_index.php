@@ -21,34 +21,8 @@
 
                 <!-- First Blog Post -->
             <?php
-            //PAGINATION
-            //makin pages and limiting the number of posts per page
-
-            if(isset($_GET['page'])){
-
-                $page = $_GET['page'];
-
-            }else{
-                echo " ";
-            }
-              
-            if ($page == 0 || $page == 1) {
-               $page_1 = 0;
-            }else{
-                // I DONT REALLY GET THE MATH HERE BUT IT DISPLAYS 5 POSTS PER PAGE
-                $page_1 =($page * 5) -5;
-            }
-
-
-            $post_query_count = "SELECT * FROM posts ";
-            $find_count = mysqli_query($connection,$post_query_count );
-            $count = mysqli_num_rows($find_count);
-            $count = ceil($count / 5);
-
-
-                $query = "SELECT * FROM posts LIMIT $page_1, 5";
+                $query = "SELECT * FROM posts";
                  $select_all_posts_query = mysqli_query($connection,$query);
-                 
                  while ($row = mysqli_fetch_assoc($select_all_posts_query )) {
                      $post_id = $row["post_id"];
                      $post_title = $row["post_title"];
@@ -61,12 +35,8 @@
                      if ($post_status !== 'published') {
                ?>
 
-
-               <h1><?php echo $count ?></h1>
-
                 <h2>
-                    <a href="post.php?p_id=<?php echo $post_id; ?>"><?php 
-                    echo $post_title;?></a>
+                    <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title;?></a>
                 </h2>
                 <p class="lead">
                     by <a href="author_post.php?author=<?php echo $post_author; ?>&p_id=<?php echo $post_id; ?>"><?php echo $post_author; ?></a>
@@ -89,30 +59,7 @@
                   ?>
 
                 <hr>
-        
-        <ul class="pager">
-      
-<?php
 
-for ($i=1; $i <=$count; $i++) {
-
-    if($i == $page){
-        echo "<li><a class='active_link' href='index.php?page={$i}'>{$i}</a></li>";
-
-    }else{
-        echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
-
-    }
-
-
-}
-
-
-?>
-
-
-
-        </ul>
 
         </div>
 
@@ -124,7 +71,7 @@ for ($i=1; $i <=$count; $i++) {
 
         <!-- /.row -->
 
-<hr>
+        <hr>
   <!--footer-->
         <?php include "includes/footer.php" ?>
 

@@ -11,43 +11,59 @@
 
         <div class="row">
 
-            <!-- Blog Entries Column -->
-            <div class="col-md-8">
+    <!-- Blog Entries Column -->
+    <div class="col-md-8">
+
+        <h1 class="page-header">
+            Page Heading
+            <small>Secondary Text</small>
+        </h1>
+
+        <!-- First Blog Post -->
+    <?php
 
 
-                <!-- First Blog Post -->
-            <?php
-            if(isset($_GET['p_id'])){
-               $the_post_id = $_GET['p_id'];
-            }
-                $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
-                 $select_all_posts_query = mysqli_query($connection,$query);
-                 while ($row = mysqli_fetch_assoc($select_all_posts_query )) {
-                     $post_title  = $row["post_title"];
-                     $post_author = $row["post_author"];
-                     $post_date   = $row["post_date"];
-                     $post_image  = $row["post_image"];
-                     $post_content= $row["post_content"];
-               ?>
-               <!-- added the post title as the heading  -->
-                <h1 class="page-header">
-                    <!-- //removed unnecessary link in the post title for the heading  -->
-                    <?php echo $post_title ?>
-                </h1>
+    if(isset($_GET['p_id'])){
+       $the_post_id = $_GET['p_id'];
 
-                <!-- //add profile icon to streamline the look of the page -->
-                <p><span class="glyphicon glyphicon-user"></span><a href="index.php"><?php echo $post_author ?></a></p>
-                <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date ?></p>
-                <hr>
-                <img class="img-responsive" src="images/<?php echo $post_image; ?>" alt="">
-                <hr>
-                <p><?php echo $post_content ?></p>
 
-                     <hr>
+       $view_query = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = $the_post_id";
+       $send_view_query = mysqli_query($connection,$view_query);
+       if (!$send_view_query) {
+         die("views query failed" . mysqli_error($connection));
+       }
+  
+        $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
+         $select_all_posts_query = mysqli_query($connection,$query);
+         while ($row = mysqli_fetch_assoc($select_all_posts_query )) {
+             $post_title  = $row["post_title"];
+             $post_author = $row["post_author"];
+             $post_date   = $row["post_date"];
+             $post_image  = $row["post_image"];
+             $post_content= $row["post_content"];
+
+           
+       ?>
+
+        <h2>
+            <a href="#"><?php echo $post_title ?></a>
+        </h2>
+        <p class="lead">
+            by <a href="index.php"><?php echo $post_author ?></a>
+        </p>
+        <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date ?></p>
+        <hr>
+        <img class="img-responsive" src="images/<?php echo $post_image; ?>" alt="">
+        <hr>
+        <p><?php echo $post_content ?></p>
+
+             <hr>
 
   <?php }
-
-
+//if something in posts misbehaves remove or correct everything after the following bracket }else
+  }else{
+    header("Location:index.php");
+  }
   ?>
 
                <!-- Blog Comments -->
@@ -72,8 +88,8 @@
                die('QUERY FAILED'.mysqli_error($connection)); 
             }
 
-            $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 "; 
-            $query .= " WHERE post_id = $the_post_id "; 
+            // $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 "; 
+            // $query .= " WHERE post_id = $the_post_id "; 
 
 
             $update_comment_count = mysqli_query($connection,$query); 
